@@ -113,6 +113,12 @@ async def update_user(user: User):
     
     user_dict =dict(user)
     id = user_dict.pop("id")
+    if not ObjectId.is_valid(id):
+        raise HTTPException(
+            status_code=400,
+            detail="ID de usuario no válido"
+        )
+
     resultado = db_client.users.update_one(
         {"_id": ObjectId(id)},
         {"$set": user_dict}
