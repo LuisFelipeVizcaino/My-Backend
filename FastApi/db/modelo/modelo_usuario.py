@@ -1,0 +1,9 @@
+from pydantic import BaseModel
+
+class User(BaseModel):
+    id : str | None = None
+    name : str
+    age : int
+
+class Userdb(User):
+    password: str
